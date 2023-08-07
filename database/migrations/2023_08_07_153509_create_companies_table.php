@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('type')
-                ->index();
+            $table->foreignId('user_id')
+                ->constrained();
             $table->string('name');
-            $table->string('email')->index();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->string('username')->unique();
             $table->unsignedInteger('status')
-                ->comment('0:inactive, 1: active, 2: freeze, 3: suspended')
+                ->comment('0:inactive, 1:active')
                 ->index();
-            $table->string('shorten_url')
-                ->unique();
+            $table->string('website')->nullable();
+            $table->boolean('is_external')
+                ->default(false)
+                ->comment('external website url');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('companies');
     }
 };
