@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('activity_log', function (Blueprint $table) {
-            $table->string('guard')->index();
+            $table->unsignedTinyInteger('environment')
+                ->comment('1:production,2:localhost,3:staging');
             $table->string('host');
             $table->string('path');
-            $table->text('user_agent');
             $table->string('ip_address');
-            $table->string('location')->nullable();
+            $table->string('location')->nullable()->index();
             $table->json('trackers')->nullable();
+            $table->text('user_agent');
 
-            $table->index(['host', 'path'], 'full_url_index');
+            $table->index(['host', 'path']);
         });
     }
 
@@ -31,9 +32,8 @@ return new class extends Migration
     {
         Schema::table('activity_log', function (Blueprint $table) {
             $table->dropIndex(['host', 'path']);
-            $table->dropIndex(['guard']);
 
-            $table->dropColumn(['guard', 'host', 'path', 'user_agent', 'ip_address', 'location', 'trackers']);
+            $table->dropColumn(['host', 'path', 'user_agent', 'ip_address', 'location', 'trackers']);
         });
     }
 };

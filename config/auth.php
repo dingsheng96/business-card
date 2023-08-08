@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\User;
+use App\Models\Admin;
+use App\Constants\Guard;
+
 return [
 
     /*
@@ -14,8 +18,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'users',
-        'passwords' => 'users',
+        'guard' => Guard::USER,
+        'passwords' =>  Guard::USER,
     ],
 
     /*
@@ -36,14 +40,13 @@ return [
     */
 
     'guards' => [
-        'admins' => [
+        Guard::ADMIN => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => Guard::ADMIN,
         ],
-
-        'users' => [
+        Guard::USER => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => Guard::USER,
         ],
     ],
 
@@ -65,14 +68,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        Guard::USER => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
-
-        'admins' => [
+        Guard::ADMIN => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => Admin::class,
         ],
     ],
 
@@ -96,15 +98,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        Guard::USER => [
+            'provider' => Guard::USER,
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
         ],
-
-        'admins' => [
-            'provider' => 'admins',
+        Guard::ADMIN => [
+            'provider' => Guard::ADMIN,
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
