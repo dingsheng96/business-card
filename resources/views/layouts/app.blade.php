@@ -11,19 +11,42 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-    <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+    @livewireStyles
 </head>
 
-<body>
+<body class="@auth hold-transition sidebar-mini @endauth">
     <div id="app">
-        @yield('content')
+        @auth
+        <div class="wrapper">
+            <x-navbars.sidebar></x-navbars.sidebar>
+
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <x-navbars.navs.auth></x-navbars.navs.auth>
+            </nav>
+
+            <div class="content-wrapper">
+                {{ $slot }}
+            </div>
+
+            <x-footers.auth></x-footers.auth>
+        </div>
+        @else
+        <main class="d-flex w-100">
+            {{ $slot }}
+        </main>
+        @endauth
     </div>
 
-    @stack('scripts')
+    @livewireScripts
 </body>
 
 </html>

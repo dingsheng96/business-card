@@ -18,4 +18,9 @@ class ActivityLog extends SpatieActivityLog implements ActivityContract
         'password',
         'password_confirmation'
     ];
+
+    public function getHiddenInputs()
+    {
+        return $this->hiddenInputs;
+    }
 }

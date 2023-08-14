@@ -11,13 +11,13 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The path to your application's "dashboard" route.
+     * The path to your application's "home" route.
      *
      * Typically, users are redirected here after authentication.
      *
      * @var string
      */
-    public const DASHBOARD = '/dashboard';
+    public const HOME = '/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->name('admin.')
-                ->namespace('App\\Http\\Controllers\\Admin')
+                ->namespace('App\\Http\\Livewire\\Admin')
                 ->domain('portal.' . config('app.host'))
                 ->group(base_path('routes/admin.php'));
         });
