@@ -1,3 +1,3 @@
 <div>
-    <button wire:click="logout">Logout</button>
+    <button wire:click="logout" class="btn btn-custom-primary">Logout</button>
 </div>

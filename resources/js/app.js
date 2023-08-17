@@ -1,1 +1,1 @@
-import "jscroll";
+import "admin-lte";

@@ -1,7 +1,3 @@
-// Variables
 @import 'variables';
-
-// AdminLTE
-@import "admin-lte/dist/css/adminlte.css";
-
-@import "custom";
+@import 'admin-lte/adminlte';
+@import 'custom';

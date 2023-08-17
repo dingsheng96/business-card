@@ -18,25 +18,25 @@ class SideNavSeeder extends Seeder
      */
     public function run(): void
     {
-        // $permission_groups = PermissionGroup::query()
-        //     ->orderBy('guard_name')
-        //     ->orderBy('name')
-        //     ->get()
-        //     ->groupBy('guard_name')
-        //     ->map(fn ($collection) => $collection->pluck('id', 'name'))
-        //     ->toArray();
+        $permission_groups = PermissionGroup::query()
+            ->orderBy('guard_name')
+            ->orderBy('name')
+            ->get()
+            ->groupBy('guard_name')
+            ->map(fn ($collection) => $collection->pluck('id', 'name'))
+            ->toArray();
 
-        // foreach ($this->sidenavs() as $guard_name => $side_nav_items) {
-        //     foreach ($side_nav_items as $item) {
-        //         $side_nav = ModelsSideNav::firstOrCreate(
-        //             Arr::only($item, ['name']) + compact('guard_name'),
-        //             Arr::except($item, ['name', 'permission_group'])
-        //         );
+        foreach ($this->sidenavs() as $guard_name => $side_nav_items) {
+            foreach ($side_nav_items as $item) {
+                $side_nav = ModelsSideNav::firstOrCreate(
+                    Arr::only($item, ['name']) + compact('guard_name'),
+                    Arr::except($item, ['name', 'permission_group'])
+                );
 
-        //         $side_nav->permissionGroups()
-        //             ->sync(data_get($permission_groups, "{$guard_name}.{$item['permission_group']}"));
-        //     }
-        // }
+                $side_nav->permissionGroups()
+                    ->sync(data_get($permission_groups, "{$guard_name}.{$item['permission_group']}"));
+            }
+        }
 
         $side_nav = ModelsSideNav::query()
             ->with('permissionGroups', fn ($query) => $query->select('name'))

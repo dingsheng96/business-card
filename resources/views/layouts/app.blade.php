@@ -13,12 +13,17 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" />
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js" defer></script>
+
+    @vite(['resources/sass/app.scss','resources/js/app.js'])
 
     @livewireStyles
 </head>
@@ -27,11 +32,10 @@
     <div id="app">
         @auth
         <div class="wrapper">
-            <x-navbars.sidebar></x-navbars.sidebar>
 
-            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-                <x-navbars.navs.auth></x-navbars.navs.auth>
-            </nav>
+            <x-navbars.navs.auth></x-navbars.navs.auth>
+
+            <x-navbars.sidebar></x-navbars.sidebar>
 
             <div class="content-wrapper">
                 {{ $slot }}
@@ -47,6 +51,7 @@
     </div>
 
     @livewireScripts
+
 </body>
 
 </html>
