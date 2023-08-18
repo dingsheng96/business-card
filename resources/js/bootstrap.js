@@ -1,8 +1,8 @@
 import { popper } from "@popperjs/core";
-import jQuery from "jquery";
+window.popper = popper;
 
+import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
-window.Popper = popper;
 
 import "bootstrap";
 
