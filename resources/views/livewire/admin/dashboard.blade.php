@@ -17,7 +17,6 @@
 
     <section class="content">
         <div class="container-fluid">
-            @livewire('admin.auth.logout')
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Title</h3>
